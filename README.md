@@ -21,9 +21,12 @@ Follow the given instructions and tips:
     - multiply
     - divide
   - Each of the methods above should take in two numbers as request parameters.
-  - Each of the methods above should return a `double`.
+  - Each of the methods above should return a `Double`.
   - Each of these methods will use the `@GetMapping` annotation with the method
     name as the path (i.e., "/add" will be the route for the `add()` method).
+    - Since each of these methods will take in two parameters, the full URL
+      might look like: `http://localhost:8080/add?x=8&y=4` where x and y are
+      the request parameters.
 - Create a `CalculatorService` class. This will be where we place the business
   logic.
   - The service will need to have the following methods:
@@ -32,13 +35,15 @@ Follow the given instructions and tips:
     - product
     - quotient
   - Each of the methods above should take in two numbers as parameters and return
-    a `double`.
+    a `Double`.
   - For the `subtract()` and `divide()` methods, the first number argument will
     be the minuend or the dividend respectfully.
     - If the first parameter in a subtraction method is 5, then 5 will be the
       number we subtract from.
     - If the first parameter in a division method is 5, then 5 will be the number
       that is being divided.
+  - Remember, anything divided by 0 is not a number. Print an error to the console
+    and return null when 0 is given as divisor (second number).
   - Add the service to the controller class as we saw in the Service Class
     lesson.
     - Add a `private final` reference to the `CalculatorService` class to the
@@ -85,4 +90,37 @@ following project structure:
 
 ## Example Output
 
-123456789101112131415161718192021222324252627ac28293031323334353637383940404143454
+Consider the example outputs:
+
+### Addition
+
+Request URL: `http://localhost:8080/add?x=8&y=4`
+
+![Postman-add-request](https://curriculum-content.s3.amazonaws.com/spring-mod-1/mvc-lab/mvc-lab-add.png)
+
+### Subtraction
+
+Request URL: `http://localhost:8080/subtract?x=8&y=4`
+
+![Postman-subtract-request](https://curriculum-content.s3.amazonaws.com/spring-mod-1/mvc-lab/mvc-lab-subtract.png)
+
+### Multiplication
+
+Request URL: `http://localhost:8080/multiply?x=8&y=4`
+
+![Postman-multiply-request](https://curriculum-content.s3.amazonaws.com/spring-mod-1/mvc-lab/mvc-lab-multiply.png)
+
+### Division
+
+Request URL: `http://localhost:8080/divide?x=8&y=4`
+
+![Postman-divide-request](https://curriculum-content.s3.amazonaws.com/spring-mod-1/mvc-lab/mvc-lab-divide.png)
+
+Request URL: `http://localhost:8080/divide?x=8&y=0`
+
+Note that request above will attempt to divide by 0; which should return null
+since anything divided by 0 is not a number.
+
+![Postman-divide-by-zero](https://curriculum-content.s3.amazonaws.com/spring-mod-1/mvc-lab/mvc-lab-divide-zero-postman.png)
+
+![Console-error-divide-by-0](https://curriculum-content.s3.amazonaws.com/spring-mod-1/mvc-lab/mvc-lab-divide-zero-console-error.png)
