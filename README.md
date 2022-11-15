@@ -98,25 +98,25 @@ Consider the example outputs:
 
 ### Addition
 
-Request URL: `http://localhost:8080/add?x=8&y=4`
+Request URL: `http://localhost:8080/add?x=8.0&y=4.0`
 
 ![Postman-add-request](https://curriculum-content.s3.amazonaws.com/spring-mod-1/mvc-lab/mvc-lab-add.png)
 
 ### Subtraction
 
-Request URL: `http://localhost:8080/subtract?x=8&y=4`
+Request URL: `http://localhost:8080/subtract?x=8.0&y=4.0`
 
 ![Postman-subtract-request](https://curriculum-content.s3.amazonaws.com/spring-mod-1/mvc-lab/mvc-lab-subtract.png)
 
 ### Multiplication
 
-Request URL: `http://localhost:8080/multiply?x=8&y=4`
+Request URL: `http://localhost:8080/multiply?x=8.0&y=4.0`
 
 ![Postman-multiply-request](https://curriculum-content.s3.amazonaws.com/spring-mod-1/mvc-lab/mvc-lab-multiply.png)
 
 ### Division
 
-Request URL: `http://localhost:8080/divide?x=8&y=4`
+Request URL: `http://localhost:8080/divide?x=8.0&y=4.0`
 
 ![Postman-divide-request](https://curriculum-content.s3.amazonaws.com/spring-mod-1/mvc-lab/mvc-lab-divide.png)
 
