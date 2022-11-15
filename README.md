@@ -3,7 +3,7 @@
 ## Learning Goals
 
 - Practice creating a web application using the Spring Framework.
-- Create a `@Controller` class.
+- Create a `@RestController` class.
 - Create a `@Service` class.
 - Use Postman as an API Client tool to test.
 
@@ -20,7 +20,8 @@ Follow the given instructions and tips:
     - subtract
     - multiply
     - divide
-  - Each of the methods above should take in two numbers as request parameters.
+  - Each of the methods above should take in two `double` variables as request
+    parameters.
   - Each of the methods above should return a `Double`.
   - Each of these methods will use the `@GetMapping` annotation with the method
     name as the path (i.e., "/add" will be the route for the `add()` method).
@@ -34,8 +35,8 @@ Follow the given instructions and tips:
     - difference
     - product
     - quotient
-  - Each of the methods above should take in two numbers as parameters and return
-    a `Double`.
+  - Each of the methods above should take in two `double` variables as parameters
+    and return a `Double`.
   - For the `subtract()` and `divide()` methods, the first number argument will
     be the minuend or the dividend respectfully.
     - If the first parameter in a subtraction method is 5, then 5 will be the
@@ -49,6 +50,9 @@ Follow the given instructions and tips:
     - Add a `private final` reference to the `CalculatorService` class to the
       controller class.
     - Add an `@Autowired` constructor to the controller class.
+- Suggestion: Start by implementing the `add()` and `sum()` methods in the
+  controller and the service classes respectively. Once that is working, then add
+  the other methods one at a time.
 - Use the `SpringMod1MvcLabApplication` class to run the application.
 - Use Postman to test the application.
 
