@@ -1,215 +1,130 @@
-# Spring Web MVC Lab 1
+# Spring Web MVC Lab
 
-Congratulations! You have been hired by Access Camp and for your first task, you
-have been tasked with building out a website to log campers with their
-activities.
+## Learning Goals
 
-Your task is to build the API according to the deliverables below.
+- Practice creating a web application using the Spring Framework.
+- Create a `@RestController` class.
+- Create a `@Service` class.
+- Use Postman as an API Client tool to test.
 
-## Setup
+## Instructions
 
-Use [Spring Initializr](https://start.spring.io/) to create a project with the
-following properties:
+Create a simple web application using the Spring Framework to perform simple
+calculator operations between two numbers.
 
-- Java 11
-- Maven Build
+Follow the given instructions and tips:
 
-And add the following dependencies:
+- Create a `CalculatorController` class. This will be the controller class.
+  - The controller will need to have the following methods:
+    - add
+    - subtract
+    - multiply
+    - divide
+  - Each of the methods above should take in two `double` variables as request
+    parameters.
+  - Each of the methods above should return a `Double`.
+  - Each of these methods will use the `@GetMapping` annotation with the method
+    name as the path (i.e., "/add" will be the route for the `add()` method).
+    - Since each of these methods will take in two parameters, the full URL
+      might look like: `http://localhost:8080/add?x=8&y=4` where x and y are
+      the request parameters.
+- Create a `CalculatorService` class. This will be where we place the business
+  logic.
+  - The service will need to have the following methods:
+    - sum
+    - difference
+    - product
+    - quotient
+  - Each of the methods above should take in two `double` variables as parameters
+    and return a `Double`.
+  - For the `subtract()` and `divide()` methods, the first number argument will
+    be the minuend or the dividend respectfully.
+    - If the first parameter in a subtraction method is 5, then 5 will be the
+      number we subtract from.
+    - If the first parameter in a division method is 5, then 5 will be the number
+      that is being divided.
+  - Remember, anything divided by 0 is not a number. Print an error to the console
+    and return null when 0 is given as divisor (second number).
+  - Add the service to the controller class as we saw in the Service Class
+    lesson.
+    - Add a `private final` reference to the `CalculatorService` class to the
+      controller class.
+    - Add an `@Autowired` constructor to the controller class.
+- Suggestion: Start by implementing the `add()` and `sum()` methods in the
+  controller and the service classes respectively. Once that is working, then add
+  the other methods one at a time.
+- Use the `SpringMod1MvcLabApplication` class to run the application.
+- Use Postman to test the application.
 
-- Spring Web.
-- Spring Data JPA.
-- A database of your choice (H2, Postgres, MySQL).
+## Project Structure
 
-Generate the project and open it up in IntelliJ.
+The Spring Boot project has already been initialized for you. Consider the
+following project structure:
 
-## Models
-
-You need to create the following relationships:
-
-- A `Camper` has many `Signups`, and has many `Activity`s through `Signup`s
-- An `Activity` has many `Signups`, and has many has many `Camper`s through
-  `Signup`s
-- A `Signup` belongs to a `Camper` and belongs to a `Activity`
-
-Start by creating the models and migrations for the following database tables:
-
-![domain diagram](https://curriculum-content.s3.amazonaws.com/phase-4/mock-challenge-camping-fun/diagram.png)
-
-## Validations
-
-Add validations to the `Camper` model:
-
-- must have a `name`
-- must have an `age` between 8 and 18
-
-Add validations to the `Signup` model:
-
-- must have a `time` between 0 and 23 (referring to the hour of day for the
-  activity)
-
-## Routes
-
-Set up the following routes. Make sure to return JSON data in the format
-specified along with the appropriate HTTP verb.
-
-### GET /campers
-
-Return JSON data in the format below. **Note**: you should return a JSON
-response in this format, without any additional nested data related to each
-camper.
-
-```json
-[
-  {
-    "id": 1,
-    "name": "Caitlin",
-    "age": 8
-  },
-  {
-    "id": 2,
-    "name": "Lizzie",
-    "age": 9
-  }
-]
+```text
+├── CONTRIBUTING.md
+├── HELP.md
+├── LICENSE.md
+├── mvnw
+├── mvnw.cmd
+├── pom.xml
+├── README.md
+└── src
+    ├── main
+    │   ├── java
+    │   │   └── com
+    │   │       └── example
+    │   │           └── springmod1mvclab
+    │   │               ├── SpringMod1MvcLabApplication.java
+    │   │               ├── controller
+    │   │               │   └── CalculatorController.java
+    │   │               └── service
+    │   │                   └── CalculatorService.java
+    │   └── resources
+    │       ├── application.properties
+    │       ├── static
+    │       └── templates
+    └── test
+        └── java
+            └── org
+                └── example
+                    └── springmod1mvclab
+                        └── SpringMod1MvcLabApplication.java
 ```
 
-### GET /campers/:id
+## Example Output
 
-If the `Camper` exists, return JSON data in the format below. 
+Consider the example outputs:
 
-**Note**: you will
-need to serialize the data for this response differently than for the
-`GET /campers` route. Make sure to include an array of activities for each
-camper.
+### Addition
 
-```json
-{
-  "id": 1,
-  "name": "Caitlin",
-  "age": 8,
-  "activities": [
-    {
-      "id": 1,
-      "name": "Archery",
-      "difficulty": 2
-    },
-    {
-      "id": 2,
-      "name": "Swimming",
-      "difficulty": 3
-    }
-  ]
-}
-```
+Request URL: `http://localhost:8080/add?x=8.0&y=4.0`
 
-If the `Camper` does not exist, return the following JSON data, along with the
-appropriate HTTP status code:
+![Postman-add-request](https://curriculum-content.s3.amazonaws.com/spring-mod-1/mvc-lab/mvc-lab-add.png)
 
-```json
-{
-  "error": "Camper not found"
-}
-```
+### Subtraction
 
-### POST /campers
+Request URL: `http://localhost:8080/subtract?x=8.0&y=4.0`
 
-This route should create a new `Camper`. It should accept an object with the
-following properties in the body of the request:
+![Postman-subtract-request](https://curriculum-content.s3.amazonaws.com/spring-mod-1/mvc-lab/mvc-lab-subtract.png)
 
-```json
-{
-  "name": "Zoe",
-  "age": 11
-}
-```
+### Multiplication
 
-If the `Camper` is created successfully, send back a response with the new
-`Camper`:
+Request URL: `http://localhost:8080/multiply?x=8.0&y=4.0`
 
-```json
-{
-  "id": 2,
-  "name": "Zoe",
-  "age": 11
-}
-```
+![Postman-multiply-request](https://curriculum-content.s3.amazonaws.com/spring-mod-1/mvc-lab/mvc-lab-multiply.png)
 
-If the `Camper` is **not** created successfully, return the following JSON data,
-along with the appropriate HTTP status code:
+### Division
 
-```json
-{
-  "errors": ["validation errors"]
-}
-```
+Request URL: `http://localhost:8080/divide?x=8.0&y=4.0`
 
-### GET /activities
+![Postman-divide-request](https://curriculum-content.s3.amazonaws.com/spring-mod-1/mvc-lab/mvc-lab-divide.png)
 
-Return JSON data in the format below:
+Request URL: `http://localhost:8080/divide?x=8&y=0`
 
-```json
-[
-  {
-    "id": 1,
-    "name": "Archery",
-    "difficulty": 2
-  },
-  {
-    "id": 2,
-    "name": "Swimming",
-    "difficulty": 3
-  }
-]
-```
+Note that request above will attempt to divide by 0; which should return null
+since anything divided by 0 is not a number.
 
-### DELETE /activities/:id
+![Postman-divide-by-zero](https://curriculum-content.s3.amazonaws.com/spring-mod-1/mvc-lab/mvc-lab-divide-zero-postman.png)
 
-If the `Activity` exists, it should be removed from the database, along with any
-`Signup`s that are associated with it (a `Signup` belongs to an `Activity`, so
-you need to delete the `Signup`s before the `Activity` can be deleted).
-
-After deleting the `Activity`, return an _empty_ response body, along with the
-appropriate HTTP status code.
-
-If the `Activity` does not exist, return the following JSON data, along with the
-appropriate HTTP status code:
-
-```json
-{
-  "error": "Activity not found"
-}
-```
-
-### POST /signups
-
-This route should create a new `Signup` that is associated with an existing
-`Camper` and `Activity`. It should accept an object with the following
-properties in the body of the request:
-
-```json
-{
-  "time": 9,
-  "camper_id": 1,
-  "activity_id": 3
-}
-```
-
-If the `Signup` is created successfully, send back a response with the data
-related to the `Activity`:
-
-```json
-{
-  "id": 1,
-  "name": "Archery",
-  "difficulty": 2
-}
-```
-
-If the `Signup` is **not** created successfully, return the following JSON data,
-along with the appropriate HTTP status code:
-
-```json
-{
-  "errors": ["validation errors"]
-}
-```
+![Console-error-divide-by-0](https://curriculum-content.s3.amazonaws.com/spring-mod-1/mvc-lab/mvc-lab-divide-zero-console-error.png)
